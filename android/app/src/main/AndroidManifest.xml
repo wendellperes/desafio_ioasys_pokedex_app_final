@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.app_base_clean">
+    package="com.example.pekedex_ioasys">
    <application
-        android:label="app_base_clean"
+        android:label="pekedex_ioasys"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

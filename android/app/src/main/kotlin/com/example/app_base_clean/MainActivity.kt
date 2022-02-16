@@ -1,4 +1,4 @@
-package com.example.app_base_clean
+package com.example.pekedex_ioasys
 
 import io.flutter.embedding.android.FlutterActivity
 
