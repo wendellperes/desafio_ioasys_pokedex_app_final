@@ -16,4 +16,11 @@ class AppTextStyles {
       fontWeight: FontWeight.w700,
       fontStyle: FontStyle.normal
   );
+
+  static final TextStyle titleFavorit = GoogleFonts.poppins(
+      color: AppColors.pinkBackground,
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      fontStyle: FontStyle.normal,
+  );
 }

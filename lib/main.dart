@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'features/pokemons/presentation/pages/details_page.dart';
+import 'features/pokemons/presentation/pages/favorit_page.dart';
 import 'features/pokemons/presentation/pages/home_page.dart';
 import 'features/pokemons/presentation/pages/splash_page.dart';
 
@@ -16,9 +18,10 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       title: 'Flutter Pokedex',
       initialRoute: "/",
+      debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
         '/': (BuildContext context) =>  SplashPage(),
-        '/HomePage': (BuildContext context) =>  const HomePage(),
+        '/HomePage': (BuildContext context) =>  const DetailsPage(),
       },
     );
   }
