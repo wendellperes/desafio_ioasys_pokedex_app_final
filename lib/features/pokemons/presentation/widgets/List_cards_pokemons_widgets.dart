@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../consts/colors_type.dart';
+import '../../../../utils/getImage.dart';
 class CardsPokemonsList extends StatefulWidget {
   const CardsPokemonsList({ Key? key }) : super(key: key);
 
@@ -42,11 +44,11 @@ class _CardsPokemonsListState extends State<CardsPokemonsList> {
                           children: [
                             Container(
                               margin: EdgeInsets.only(right: 5),
-                              child: Text('# 000', style: TextStyle(color: Colors.green),),
+                              child: Text('# ', style: TextStyle(color: Colors.green),),
                               alignment: Alignment.topRight,
                             ),
-                            SvgPicture.network(
-                              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg",
+                            Image.network(
+                              GetImagePokemon.PokemonFrontHome(index),
                               height: 50,
                               width: 50,
                             ),

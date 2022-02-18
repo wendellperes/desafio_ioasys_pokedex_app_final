@@ -5,4 +5,6 @@ class AppColors {
   static final Color darktext       = Color(0xFF666666);
   static final Color darktext2      = Color(0xFFBDBDBD);
   static final Color whiteBackground = Color(0xFFFFFFFF);
+  static final Color lightGray      = Color(0xFFE0E0E0);
+  static final Color darkGray       = Color(0xFF212121);
 }
