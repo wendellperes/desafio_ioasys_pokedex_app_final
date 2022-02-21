@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:pekedex_ioasys/consts/colors_type.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
+import 'package:pekedex_ioasys/features/pokemons/domain/entities/result_Pokemon._entity.dart';
 import 'package:pekedex_ioasys/features/pokemons/presentation/controllers/home_page_controller.dart';
 import '../../../../consts/texts_styles.dart';
 import '../../../../core/dependency_injector.dart';
@@ -112,7 +113,7 @@ class _HomePageViewState extends State<HomePageView> {
                                   Icons.search,
                                 ),
                                 onPressed: () {
-                                  _controller.getPokemonByName('bulbasaur');
+                                  _controller.getPokemonByName(_pesquisa.text);
                                 },
                               )),
                         ),
@@ -151,6 +152,9 @@ class _HomePageViewState extends State<HomePageView> {
                               children: List.generate(pokemons.length, (index) {
                                 return CardsPokemonsList(
                                   pokemons: pokemons[index],
+                                  onTap: (){
+                                    print(pokemons[index].idPokemon);
+                                  },
                                 );
                               }),
                             ),
@@ -172,6 +176,9 @@ class _HomePageViewState extends State<HomePageView> {
                               ),
                             ),
                           );
+                        },
+                        error: (message, _){
+                          return NoSearch();
                         },
                         orElse: () => Container(),
                       ),

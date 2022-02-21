@@ -11,9 +11,9 @@ import '../../domain/entities/usuario_entity.dart';
 
 abstract class IPokemonsNetworkDatasource {
   Future<List<ResultsModel>> listAll();
-  Future<PokemonEntity> listById(String id);
+  Future<PokemonResultModel> listById(String id);
   Future<ColorModel> getColor(String id);
-  Future<PokemonModel> listByName(String name);
+  Future<List<ResultsModel>> listByName(String name);
 }
 
 class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
@@ -24,8 +24,8 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
         BaseOptions(
           baseUrl: PokeAPIEndpoints.urlBase,
         ),
-      ).get("/pokemon");
-      final result = response.data['results'];
+      ).get(PokeAPIEndpoints.getAllPokemon);
+      final List result = response.data['results'];
       final resultModel = result
           .map<ResultsModel>((data) => ResultsModel.fromJson(data))
           .toList();
@@ -36,34 +36,81 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
   }
 
   @override
-  Future<PokemonEntity> listById(String id) async {
-    try {
-      return PokemonEntity.empty();
-      // final response =
-      //     await _httpClient.get('${PixEndpoints.faqTopic}${topic}');
-      // final result = FaqPixModel.fromJson(response.data[0]);
-      // return result;
-      //TODO: Fazer uma chamada Usando o DIO
-
-    } catch (e, stack) {
-      throw Exception;
-      // await _logService.recordError(e, stack);
-      // throw ServerException.fromMap(e.data);
-      //TODO: Realizar tratamento de erros
-    }
-  }
-
-  @override
-  Future<PokemonModel> listByName(String name) async {
+  Future<PokemonResultModel> listById(String id) async {
     try {
       final response = await Dio(
         BaseOptions(
           baseUrl: PokeAPIEndpoints.urlBase,
         ),
-      ).get("/pokemon/${name}");
+      ).get("/pokemon/${id}");
       final result = response.data;
-      final resultModel = result
-          .map<PokemonModel>((data) => PokemonModel.fromJson(data))
+
+      final responseColorAndDescription = await Dio(
+        BaseOptions(
+          baseUrl: PokeAPIEndpoints.urlBase,
+        ),
+      ).get("/pokemon-species/${result['id']}");
+      final String color = responseColorAndDescription.data['color']['name'];
+      final String description = responseColorAndDescription
+          .data['flavor_text_entries'][0]['flavor_text'];
+
+      final List resultAbilities = response.data['abilities'];
+      final List resultType = response.data['types'];
+      final List resultStatus = response.data['stats'];
+      final powers = [];
+      final type = [];
+      final status = [];
+
+      resultAbilities.forEach((element) {
+        powers.add(element['ability']['name']);
+        print(element['ability']['name']);
+      });
+      resultType.forEach((element) {
+        type.add(element['type']['name']);
+        print(element['type']['name']);
+      });
+
+      resultStatus.forEach((element) {
+        status.add(element['base_stat']);
+      });
+      var dataPokemon = {
+        'idPokemon': result['id'],
+        'abilities': powers,
+        'name': result['name'],
+        'color': color,
+        'description': description,
+        'height': result['height'],
+        'weight': result['weight'],
+        'types': type,
+        'stats': status,
+      };
+      print(dataPokemon);
+
+      final resultModel = PokemonResultModel.fromJson(dataPokemon);
+      return resultModel;
+    } catch (e, stack) {
+      throw Exception;
+    }
+  }
+
+  @override
+  Future<List<ResultsModel>> listByName(String name) async {
+    final List resposta = [];
+    try {
+      final response = await Dio(
+        BaseOptions(
+          baseUrl: PokeAPIEndpoints.urlBase,
+        ),
+      ).get("${PokeAPIEndpoints.getAllPokemon}${name}");
+      final result = response.data;
+      var dataPokemon = {
+        'name': result['name'],
+        'url': "${PokeAPIEndpoints.urlBase}${PokeAPIEndpoints.getAllPokemon}${result['id']}/",
+      };
+      resposta.add(dataPokemon);
+
+      final resultModel = resposta
+          .map<ResultsModel>((data) => ResultsModel.fromJson(data))
           .toList();
       return resultModel;
     } catch (e, stack) {
@@ -74,12 +121,12 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
   @override
   Future<ColorModel> getColor(String id) async {
     try {
-      final response = await Dio(
+      final responseColorAndDescription = await Dio(
         BaseOptions(
           baseUrl: PokeAPIEndpoints.urlBase,
         ),
       ).get("/pokemon-species/${id}");
-      final result = response.data['color'];
+      final result = responseColorAndDescription.data['color'];
       final reultColorModel = ColorModel.fromJson(result);
       //final resultModel = result.map<ResultsModel>((data) => ResultsModel.fromJson(data))
       //  .toList();

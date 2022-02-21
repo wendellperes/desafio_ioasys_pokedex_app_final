@@ -8,6 +8,7 @@ import 'package:pekedex_ioasys/features/pokemons/domain/usecases/pokemon_listar_
 import 'package:pekedex_ioasys/utils/app_state.dart';
 
 import '../../../../core/usecases/no_params.dart';
+import '../../domain/entities/result_Pokemon._entity.dart';
 import '../../domain/usecases/pokemon_get_by_name_usecase.dart';
 import '../../domain/usecases/pokemon_get_color_by_id_usecase.dart';
 
@@ -49,11 +50,7 @@ class HomePageController extends ChangeNotifier {
       update(AppState.loading());
       final pokemonsResult = await pokemonListarAllUsecase(NoParams());
       pokemonsResult.fold((_) => {}, (r) {
-        r.forEach((element) {
-          dataResult.add(
-            PokemonEntity(name: element.name, url: element.url),
-          );
-        });
+        dataResult.addAll(r);
       });
       update(AppState.success<List<PokemonEntity>>(dataResult));
     } catch (e) {
@@ -64,7 +61,11 @@ class HomePageController extends ChangeNotifier {
   Future<void> getPokemonByName(String name) async {
     try {
       update(AppState.loading());
+      dataResult.clear();
       final pokemonsResult = await pokemonListarByNameUseCase(name);
+      pokemonsResult.fold((l) => null, (r){
+        dataResult.addAll(r);
+      });
       update(AppState.success<List<PokemonEntity>>(dataResult));
     } catch (e) {
       update(AppState.error(e.toString()));

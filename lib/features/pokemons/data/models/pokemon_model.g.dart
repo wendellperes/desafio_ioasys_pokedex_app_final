@@ -6,61 +6,31 @@ part of 'pokemon_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PokemonModel _$PokemonModelFromJson(Map<String, dynamic> json) => PokemonModel(
+PokemonResultModel _$PokemonResultModelFromJson(Map<String, dynamic> json) =>
+    PokemonResultModel(
+      idPokemon: json['idPokemon'] as int?,
       abilities: (json['abilities'] as List<dynamic>?)
-          ?.map((e) => Abilities.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      baseExperience: json['baseExperience'] as int?,
-      forms: (json['forms'] as List<dynamic>?)
-          ?.map((e) => Forms.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      gameIndices: (json['gameIndices'] as List<dynamic>?)
-          ?.map((e) => GameIndices.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      height: json['height'] as int?,
-      heldItems: json['heldItems'] as List<dynamic>?,
-      id: json['id'] as int?,
-      isDefault: json['isDefault'] as bool?,
-      locationAreaEncounters: json['locationAreaEncounters'] as String?,
-      moves: (json['moves'] as List<dynamic>?)
-          ?.map((e) => Moves.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => e as String)
           .toList(),
       name: json['name'] as String?,
-      order: json['order'] as int?,
-      pastTypes: json['pastTypes'] as List<dynamic>?,
-      species: json['species'] == null
-          ? null
-          : Ability.fromJson(json['species'] as Map<String, dynamic>),
-      sprites: json['sprites'] == null
-          ? null
-          : Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
-      stats: (json['stats'] as List<dynamic>?)
-          ?.map((e) => Stats.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      types: (json['types'] as List<dynamic>?)
-          ?.map((e) => Types.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      color: json['color'] as String?,
+      description: json['description'] as String?,
+      height: json['height'] as int?,
       weight: json['weight'] as int?,
+      types:
+          (json['types'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      stats: (json['stats'] as List<dynamic>?)?.map((e) => e as int).toList(),
     );
 
-Map<String, dynamic> _$PokemonModelToJson(PokemonModel instance) =>
+Map<String, dynamic> _$PokemonResultModelToJson(PokemonResultModel instance) =>
     <String, dynamic>{
+      'idPokemon': instance.idPokemon,
       'abilities': instance.abilities,
-      'baseExperience': instance.baseExperience,
-      'forms': instance.forms,
-      'gameIndices': instance.gameIndices,
-      'height': instance.height,
-      'heldItems': instance.heldItems,
-      'id': instance.id,
-      'isDefault': instance.isDefault,
-      'locationAreaEncounters': instance.locationAreaEncounters,
-      'moves': instance.moves,
       'name': instance.name,
-      'order': instance.order,
-      'pastTypes': instance.pastTypes,
-      'species': instance.species,
-      'sprites': instance.sprites,
-      'stats': instance.stats,
-      'types': instance.types,
+      'color': instance.color,
+      'description': instance.description,
+      'height': instance.height,
       'weight': instance.weight,
+      'types': instance.types,
+      'stats': instance.stats,
     };
