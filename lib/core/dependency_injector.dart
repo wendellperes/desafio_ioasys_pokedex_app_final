@@ -27,6 +27,7 @@ void setupAppDependencies() {
     ..registerLazySingleton<DetailsPageController>(
       () => DetailsPageController(
         getPokemonByIdUseCase: serviceLocator.get<GetPokemonByIdUseCase>(),
+        controllerTheme: serviceLocator.get<HomePageController>(),
       ),
     )
     ..registerLazySingleton<IPokemonRepository>(

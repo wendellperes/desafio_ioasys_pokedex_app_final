@@ -164,28 +164,20 @@ class _HomePageViewState extends State<HomePageView> {
                           return SizedBox(
                             height: 465,
                             width: 354,
-                            child: RawScrollbar(
-                              thumbColor: AppColors.pinkBackground,
-                              radius: Radius.circular(20),
-                              thickness: 1,
-                              timeToFade: const Duration(milliseconds: 200),
-                              isAlwaysShown: true,
-                              child: GridView.count(
-                                scrollDirection: Axis.vertical,
-                                crossAxisCount: 3,
-                                children:
-                                    List.generate(pokemons.length, (index) {
-                                  return CardsPokemonsList(
-                                    pokemons: pokemons[index],
-                                    color: _controller.theme,
-                                    onTap: () {
-                                      Navigator.pushNamed(context, '/details',
-                                          arguments:
-                                              '${pokemons[index].idPokemon}');
-                                    },
-                                  );
-                                }),
-                              ),
+                            child: GridView.count(
+                              scrollDirection: Axis.vertical,
+                              crossAxisCount: 3,
+                              children: List.generate(pokemons.length, (index) {
+                                return CardsPokemonsList(
+                                  pokemons: pokemons[index],
+                                  color: _controller.theme,
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/details',
+                                        arguments:
+                                            '${pokemons[index].idPokemon}');
+                                  },
+                                );
+                              }),
                             ),
                           );
                         },
@@ -243,7 +235,8 @@ class _HomePageViewState extends State<HomePageView> {
               ),
             ),
           ),
-           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
         );
       },
     );

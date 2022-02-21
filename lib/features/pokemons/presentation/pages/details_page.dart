@@ -48,7 +48,6 @@ class _DetailsPageViewState extends State<DetailsPageView> {
 
   String idPokemon = '';
 
-
   @override
   Widget build(BuildContext context) {
     idPokemon = ModalRoute.of(context)?.settings.arguments as String;
@@ -59,6 +58,14 @@ class _DetailsPageViewState extends State<DetailsPageView> {
       builder: (_, __) => _controller.state.when(
         success: (value) {
           final pokemon = value as PokemonResultEntity;
+          List<String> abilites = [];
+          if(pokemon.abilities! != null){
+             abilites = pokemon.abilities!;
+          }else{
+            abilites = [];
+          }
+          print(abilites);
+           
           final isColorWhite =
               ColorUtils.getColorByName(pokemon.color!) == Colors.white;
           return Scaffold(
@@ -152,27 +159,34 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                           height: 20,
                                           width: 320,
                                           child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
+                                              scrollDirection: Axis.horizontal,
                                               itemCount: pokemon.types!.length,
                                               itemBuilder: (context, index) {
                                                 return Container(
                                                   height: 50,
                                                   width: 95,
-                                                  margin: EdgeInsets.only(right: 5),
+                                                  margin:
+                                                      EdgeInsets.only(right: 5),
                                                   padding: EdgeInsets.all(2),
                                                   alignment: Alignment.center,
                                                   decoration: BoxDecoration(
-                                                    color: ColorUtils.getColorByName(pokemon.color!),
+                                                    color: ColorUtils
+                                                        .getColorByName(
+                                                            pokemon.color!),
                                                     borderRadius:
-                                                        BorderRadius.circular(25),
+                                                        BorderRadius.circular(
+                                                            25),
                                                   ),
                                                   child: Text(
                                                     '${pokemon.types![index].toUpperCase()}',
                                                     style: GoogleFonts.poppins(
-                                                      color: AppColors.whiteBackground,
+                                                      color: AppColors
+                                                          .whiteBackground,
                                                       fontSize: 10,
-                                                      fontWeight: FontWeight.w700,
-                                                      fontStyle: FontStyle.normal,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontStyle:
+                                                          FontStyle.normal,
                                                     ),
                                                   ),
                                                 );
@@ -182,7 +196,8 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                     ),
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.only(left: 35, top: 15),
+                                    margin: const EdgeInsets.only(
+                                        left: 35, top: 15),
                                     child: Row(
                                       children: [
                                         Column(
@@ -196,11 +211,14 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   size: 20,
                                                 ),
                                                 Text(
-                                                  formatter.format(pokemon.weight),
+                                                  formatter
+                                                      .format(pokemon.weight),
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal),
                                                 )
                                               ],
                                             ),
@@ -213,8 +231,10 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: AppColors.darktext,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal),
                                                 )
                                               ],
                                             ),
@@ -237,8 +257,10 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   '${NumberFormat.currency(locale: 'eu', symbol: '').format(pokemon.height)}',
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal),
                                                 )
                                               ],
                                             ),
@@ -251,15 +273,17 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: AppColors.darktext,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal),
                                                 )
                                               ],
                                             ),
                                           ],
                                         ),
                                         const SizedBox(
-                                          width: 30,
+                                          width: 20,
                                         ),
                                         Column(
                                           children: [
@@ -268,12 +292,14 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  '${pokemon.abilities![0]} / ${pokemon.abilities![1]}',
+                                                  abilites.join(' / '),
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: Colors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal),
                                                 )
                                               ],
                                             ),
@@ -286,8 +312,10 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: AppColors.darktext,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal),
                                                 )
                                               ],
                                             ),
@@ -312,7 +340,8 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                   //TODO: Status Base
                                   Container(
                                     alignment: Alignment.centerLeft,
-                                    margin: const EdgeInsets.only(left: 35, top: 30),
+                                    margin: const EdgeInsets.only(
+                                        left: 35, top: 30),
                                     child: Text(
                                       'Base Status',
                                       style: GoogleFonts.poppins(
@@ -323,7 +352,8 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                     ),
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.only(left: 35, top: 15),
+                                    margin: const EdgeInsets.only(
+                                        left: 35, top: 15),
                                     child: Row(
                                       children: [
                                         Column(
@@ -419,9 +449,12 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   '${pokemon.stats![0]}',
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal,
-                                                      color: AppColors.darkGray),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color:
+                                                          AppColors.darkGray),
                                                 ),
                                                 const SizedBox(
                                                   width: 10,
@@ -431,14 +464,17 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                     Container(
                                                       height: 6,
                                                       width: 170,
-                                                      decoration:  BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              colors: const [
+                                                      decoration: BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: const [
                                                             Colors.green,
-                                                            Colors.lightGreenAccent
+                                                            Colors
+                                                                .lightGreenAccent
                                                           ],
-                                                              stops: [
-                                                            (pokemon.stats![0] / 100),
+                                                                  stops: [
+                                                            (pokemon.stats![0] /
+                                                                100),
                                                             0.0
                                                           ])),
                                                     )
@@ -455,9 +491,12 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   '${pokemon.stats![1]}',
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal,
-                                                      color: AppColors.darkGray),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color:
+                                                          AppColors.darkGray),
                                                 ),
                                                 const SizedBox(
                                                   width: 10,
@@ -467,14 +506,17 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                     Container(
                                                       height: 6,
                                                       width: 170,
-                                                      decoration:  BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              colors: const [
+                                                      decoration: BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: const [
                                                             Colors.green,
-                                                            Colors.lightGreenAccent
+                                                            Colors
+                                                                .lightGreenAccent
                                                           ],
-                                                              stops: [
-                                                            (pokemon.stats![1] / 100),
+                                                                  stops: [
+                                                            (pokemon.stats![1] /
+                                                                100),
                                                             0.0
                                                           ])),
                                                     )
@@ -491,9 +533,12 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   '${pokemon.stats![2]}',
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal,
-                                                      color: AppColors.darkGray),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color:
+                                                          AppColors.darkGray),
                                                 ),
                                                 const SizedBox(
                                                   width: 10,
@@ -503,14 +548,17 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                     Container(
                                                       height: 6,
                                                       width: 170,
-                                                      decoration:  BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              colors: const [
+                                                      decoration: BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: const [
                                                             Colors.green,
-                                                            Colors.lightGreenAccent
+                                                            Colors
+                                                                .lightGreenAccent
                                                           ],
-                                                              stops: [
-                                                             (pokemon.stats![2] / 100),
+                                                                  stops: [
+                                                            (pokemon.stats![2] /
+                                                                100),
                                                             0.0
                                                           ])),
                                                     )
@@ -527,9 +575,12 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   '${pokemon.stats![3]}',
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal,
-                                                      color: AppColors.darkGray),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color:
+                                                          AppColors.darkGray),
                                                 ),
                                                 const SizedBox(
                                                   width: 10,
@@ -539,14 +590,17 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                     Container(
                                                       height: 6,
                                                       width: 170,
-                                                      decoration:  BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              colors: const [
+                                                      decoration: BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: const [
                                                             Colors.green,
-                                                            Colors.lightGreenAccent
+                                                            Colors
+                                                                .lightGreenAccent
                                                           ],
-                                                              stops: [
-                                                            (pokemon.stats![3] / 100),
+                                                                  stops: [
+                                                            (pokemon.stats![3] /
+                                                                100),
                                                             0.0
                                                           ])),
                                                     )
@@ -563,9 +617,12 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   '${pokemon.stats![4]}',
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal,
-                                                      color: AppColors.darkGray),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color:
+                                                          AppColors.darkGray),
                                                 ),
                                                 const SizedBox(
                                                   width: 10,
@@ -575,14 +632,17 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                     Container(
                                                       height: 6,
                                                       width: 170,
-                                                      decoration:  BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              colors: const [
+                                                      decoration: BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: const [
                                                             Colors.green,
-                                                            Colors.lightGreenAccent
+                                                            Colors
+                                                                .lightGreenAccent
                                                           ],
-                                                              stops: [
-                                                            (pokemon.stats![4] / 100),
+                                                                  stops: [
+                                                            (pokemon.stats![4] /
+                                                                100),
                                                             0.0
                                                           ])),
                                                     )
@@ -599,9 +659,12 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                   '${pokemon.stats![5]}',
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontStyle: FontStyle.normal,
-                                                      color: AppColors.darkGray),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color:
+                                                          AppColors.darkGray),
                                                 ),
                                                 const SizedBox(
                                                   width: 10,
@@ -611,14 +674,17 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                                                     Container(
                                                       height: 6,
                                                       width: 170,
-                                                      decoration:  BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              colors: const [
+                                                      decoration: BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: const [
                                                             Colors.green,
-                                                            Colors.lightGreenAccent
+                                                            Colors
+                                                                .lightGreenAccent
                                                           ],
-                                                              stops: [
-                                                              (pokemon.stats![4] / 100),
+                                                                  stops: [
+                                                            (pokemon.stats![4] /
+                                                                100),
                                                             0.0
                                                           ])),
                                                     )
@@ -641,10 +707,26 @@ class _DetailsPageViewState extends State<DetailsPageView> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 50, right: 50, top: 40),
+                        margin: const EdgeInsets.only(left: 50, right: 50, top: 40),
                         child: Image.network(
                           GetImagePokemon.PokemonFrontHome(pokemon.idPokemon!),
                           scale: 2,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Container(
+                              margin: const EdgeInsets.only(left: 50, right: 50, top: 40),
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],

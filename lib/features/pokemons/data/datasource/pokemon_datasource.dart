@@ -1,18 +1,14 @@
 import 'package:dio/dio.dart';
-import 'package:pekedex_ioasys/features/pokemons/data/models/color_pokemon_model.dart';
 import 'package:pekedex_ioasys/features/pokemons/data/models/pokemon_model.dart';
 import 'package:pekedex_ioasys/features/pokemons/data/models/result_model.dart';
-import 'package:pekedex_ioasys/features/pokemons/domain/entities/color_pokemon_entity.dart';
 
 import '../../../../consts/const_endpoints.dart';
 import '../../../../core/service/dio.dart';
 import '../../domain/entities/pokemon_entity.dart';
-import '../../domain/entities/usuario_entity.dart';
 
 abstract class IPokemonsNetworkDatasource {
   Future<List<ResultsModel>> listAll(String? limit);
   Future<PokemonResultModel> listPokemonById(String id);
-  Future<ColorModel> getColor(String id);
   Future<List<ResultsModel>> listByName(String name);
 }
 
@@ -70,11 +66,9 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
 
       resultAbilities.forEach((element) {
         powers.add(element['ability']['name']);
-        print(element['ability']['name']);
       });
       resultType.forEach((element) {
         type.add(element['type']['name']);
-        print(element['type']['name']);
       });
 
       resultStatus.forEach((element) {
@@ -91,8 +85,6 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
         'types': type,
         'stats': status,
       };
-      print(dataPokemon);
-
       final resultModel = PokemonResultModel.fromJson(dataPokemon);
       return resultModel;
     } catch (e, stack) {
@@ -126,21 +118,4 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
     }
   }
 
-  @override
-  Future<ColorModel> getColor(String id) async {
-    try {
-      final responseColorAndDescription = await Dio(
-        BaseOptions(
-          baseUrl: PokeAPIEndpoints.urlBase,
-        ),
-      ).get("/pokemon-species/${id}");
-      final result = responseColorAndDescription.data['color'];
-      final reultColorModel = ColorModel.fromJson(result);
-      //final resultModel = result.map<ResultsModel>((data) => ResultsModel.fromJson(data))
-      //  .toList();
-      return reultColorModel;
-    } catch (e, stack) {
-      throw Exception;
-    }
-  }
 }
