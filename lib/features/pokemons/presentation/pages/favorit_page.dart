@@ -9,6 +9,7 @@ import '../widgets/List_cards_pokemons_widgets.dart';
 import '../widgets/header_top_widgets.dart';
 import '../widgets/no_search_widgets.dart';
 import '../widgets/title_and_icon.dart';
+
 class FavoritPage extends StatefulWidget {
   const FavoritPage({Key? key}) : super(key: key);
 
@@ -19,7 +20,8 @@ class FavoritPage extends StatefulWidget {
 class _FavoritPageState extends State<FavoritPage> {
   bool isDark = false;
   final ThemeData _dark = ThemeData(backgroundColor: AppColors.darkBackground);
-  final ThemeData _light = ThemeData(backgroundColor: AppColors.whiteBackground);
+  final ThemeData _light =
+      ThemeData(backgroundColor: AppColors.whiteBackground);
   int count = 000;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,10 @@ class _FavoritPageState extends State<FavoritPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const HeaderTop(),
+            HeaderTop(
+              value: false,
+              onChange: (value) {},
+            ),
             const SizedBox(
               height: 45,
             ),
@@ -36,11 +41,11 @@ class _FavoritPageState extends State<FavoritPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.favorite, color: AppColors.pinkBackground,),
-                  Text(
-                    'Meus favoritos', 
-                    style: AppTextStyles.titleFavorit
+                  Icon(
+                    Icons.favorite,
+                    color: AppColors.pinkBackground,
                   ),
+                  Text('Meus favoritos', style: AppTextStyles.titleFavorit),
                 ],
               ),
             ),
@@ -49,31 +54,32 @@ class _FavoritPageState extends State<FavoritPage> {
             ),
             Stack(
               children: const [
-                CardsPokemonsList(),
+                //CardsPokemonsList(),
                 Visibility(
                   visible: false,
                   child: NoSearch(),
                 )
               ],
             ),
-
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        onPressed: (){},
+        onPressed: () {},
         child: Container(
           child: Column(
             children: [
-              Icon(Icons.arrow_back, color: AppColors.pinkBackground, size: 30, ),
+              Icon(
+                Icons.arrow_back,
+                color: AppColors.pinkBackground,
+                size: 30,
+              ),
               Text(
-                'Voltar', 
+                'Voltar',
                 style: GoogleFonts.poppins(
-                  fontSize: 12,
-                  color: AppColors.pinkBackground
-                ),
+                    fontSize: 12, color: AppColors.pinkBackground),
               )
             ],
           ),

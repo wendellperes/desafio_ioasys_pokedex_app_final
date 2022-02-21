@@ -15,14 +15,14 @@ class SplashPageState extends State<SplashPage> {
   }
 
   startSplashScreenTimer() async {
-    var _duration =  const Duration(seconds: 5);
-    return  Timer(_duration, navigationToNextPage);
+    var _duration = const Duration(seconds: 5);
+    return Timer(_duration, navigationToNextPage);
   }
 
   @override
   void initState() {
     super.initState();
-   startSplashScreenTimer();
+    startSplashScreenTimer();
   }
 
   @override
@@ -35,8 +35,13 @@ class SplashPageState extends State<SplashPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('images/logo_ioasys.png',),
-            Text('ioasys pokédex', style: AppTextStyles.title,)
+            Image.asset(
+              'images/logo_ioasys.png',
+            ),
+            Text(
+              'ioasys pokédex',
+              style: AppTextStyles.title,
+            )
           ],
         ),
       ),

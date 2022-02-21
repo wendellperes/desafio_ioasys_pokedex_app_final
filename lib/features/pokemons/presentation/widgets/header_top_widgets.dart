@@ -3,17 +3,18 @@ import 'package:flutter_switch/flutter_switch.dart';
 
 import '../../../../consts/colors_type.dart';
 import 'title_and_icon.dart';
+
 class HeaderTop extends StatefulWidget {
-  const HeaderTop({Key? key}) : super(key: key);
+  const HeaderTop({Key? key, required this.onChange, required this.value})
+      : super(key: key);
+  final Function(bool) onChange;
+  final bool value;
 
   @override
   State<HeaderTop> createState() => _HeaderTopState();
 }
 
 class _HeaderTopState extends State<HeaderTop> {
-  bool isDark = false;
-  final ThemeData _dark = ThemeData(backgroundColor: AppColors.darkBackground);
-  final ThemeData _light = ThemeData(backgroundColor: AppColors.whiteBackground);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,7 +41,7 @@ class _HeaderTopState extends State<HeaderTop> {
                 width: 45.0,
                 height: 30.0,
                 toggleSize: 20.0,
-                value: isDark,
+                value: widget.value,
                 borderRadius: 30.0,
                 padding: 2.0,
                 toggleColor: Colors.white,
@@ -52,11 +53,7 @@ class _HeaderTopState extends State<HeaderTop> {
                 ),
                 activeColor: Colors.white,
                 activeToggleColor: AppColors.pinkBackground,
-                onToggle: (val) {
-                  setState(() {
-                    isDark = val;
-                  });
-                },
+                onToggle: widget.onChange,
               ),
             ],
           ),

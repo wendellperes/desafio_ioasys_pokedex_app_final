@@ -2,7 +2,7 @@
 import 'package:pekedex_ioasys/core/usecases/no_params.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/usuario_entity.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/repositories/usuario_repository.dart';
-import 'package:pekedex_ioasys/features/pokemons/domain/usecases/usuario_listar_all_usecase.dart';
+import 'package:pekedex_ioasys/features/pokemons/domain/usecases/pokemon_listar_all_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -13,7 +13,7 @@ class FakeUsuarioEntity extends Fake implements UsuarioEntity {}
 
 void main() {
   late MockUsuarioRepository repository;
-  late ListAllUseCase usuarioListUsecase;
+  late PokemonListar_all_UseCase usuarioListUsecase;
   final List<UsuarioEntity> usuarioEntityInitial = [
     UsuarioEntity(
       name: 'Wendell Caco',
@@ -25,7 +25,7 @@ void main() {
 
   setUpAll(() {
     repository = MockUsuarioRepository();
-    usuarioListUsecase = ListAllUseCase(repository);
+    usuarioListUsecase = PokemonListar_all_UseCase(repository);
     registerFallbackValue(List<FakeUsuarioEntity>);
   });
 

@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pekedex_ioasys/consts/colors_type.dart';
+import 'package:pekedex_ioasys/utils/getColor.dart';
 import 'package:pekedex_ioasys/utils/getImage.dart';
+
+import '../../domain/usecases/pokemon_listar_all_usecase.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({Key? key}) : super(key: key);
@@ -13,11 +16,19 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  late PokemonListar_all_UseCase listAllUseCase;
   bool isFavorit = false;
+
+  List<Color> cor = [];
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: ColorUtils.getColorByName('red'),
       body: Stack(
         children: [
           Container(
@@ -572,7 +583,6 @@ class _DetailsPageState extends State<DetailsPage> {
                                 ),
                               ],
                             ),
-                            
                           ],
                         ),
                       )

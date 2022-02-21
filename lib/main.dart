@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pekedex_ioasys/features/pokemons/data/datasource/pokemon_datasource.dart';
 
+import 'core/dependency_injector.dart';
 import 'features/pokemons/presentation/pages/details_page.dart';
 import 'features/pokemons/presentation/pages/favorit_page.dart';
 import 'features/pokemons/presentation/pages/home_page.dart';
 import 'features/pokemons/presentation/pages/splash_page.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  setupDependencies();
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,15 +22,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       title: 'Flutter Pokedex',
       initialRoute: "/",
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) =>  SplashPage(),
-        '/HomePage': (BuildContext context) =>  const DetailsPage(),
+        '/': (BuildContext context) => SplashPage(),
+        '/HomePage': (BuildContext context) => const HomePage(),
       },
     );
   }
 }
-
