@@ -16,9 +16,9 @@ class PokemonRepositoryImpl implements IPokemonRepository {
   );
 
   @override
-  Future<Either<Exception, List<PokemonEntity>>> listAll() async {
+  Future<Either<Exception, List<PokemonEntity>>> listAll(String? limit) async {
     try {
-      final result = await _pokemonDataSource.listAll();
+      final result = await _pokemonDataSource.listAll(limit);
       final resultParse = result.map<PokemonEntity>((e) => e.entity).toList();
       return Right(resultParse);
     } on Exception catch (e) {
@@ -38,19 +38,13 @@ class PokemonRepositoryImpl implements IPokemonRepository {
   }
 
   @override
-  Future<Either<Exception, ColorsEntity>> getByColorId(String id) async {
+  Future<Either<Exception, PokemonResultEntity>> getPokemonById(String id) async {
     try {
-      final result = await _pokemonDataSource.getColor(id);
-      final resultParse = ColorsEntity.fromEntity(result);
+      final result = await _pokemonDataSource.listPokemonById(id);
+      final resultParse = PokemonResultEntity.fromEntity(result);
       return Right(resultParse);
     } on Exception catch (e) {
       return Left(e);
     }
-  }
-
-  @override
-  Future<PokemonEntity> listById(String id) {
-    // TODO: implement listById
-    throw UnimplementedError();
   }
 }

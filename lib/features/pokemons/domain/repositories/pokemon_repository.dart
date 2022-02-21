@@ -8,8 +8,7 @@ import 'package:pekedex_ioasys/features/pokemons/domain/entities/result_Pokemon.
 import '../entities/pokemon_entity.dart';
 
 abstract class IPokemonRepository {
-  Future<Either<Exception, ColorsEntity>> getByColorId(String id);
-  Future<Either<Exception, List<PokemonEntity>>> listAll();
+  Future<Either<Exception, PokemonResultEntity>> getPokemonById(String id);
+  Future<Either<Exception, List<PokemonEntity>>> listAll(String? limit);
   Future<Either<Exception, List<PokemonEntity>>> listByName(String name);
-  Future<PokemonEntity> listById(String id);
 }

@@ -68,20 +68,23 @@ class _FavoritPageState extends State<FavoritPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         onPressed: () {},
-        child: Container(
-          child: Column(
-            children: [
-              Icon(
-                Icons.arrow_back,
-                color: AppColors.pinkBackground,
-                size: 30,
-              ),
-              Text(
-                'Voltar',
-                style: GoogleFonts.poppins(
-                    fontSize: 12, color: AppColors.pinkBackground),
-              )
-            ],
+        child: GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: Container(
+            child: Column(
+              children: [
+                Icon(
+                  Icons.arrow_back,
+                  color: AppColors.pinkBackground,
+                  size: 30,
+                ),
+                Text(
+                  'Voltar',
+                  style: GoogleFonts.poppins(
+                      fontSize: 12, color: AppColors.pinkBackground),
+                )
+              ],
+            ),
           ),
         ),
       ),

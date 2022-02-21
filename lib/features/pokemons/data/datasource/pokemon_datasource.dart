@@ -10,21 +10,28 @@ import '../../domain/entities/pokemon_entity.dart';
 import '../../domain/entities/usuario_entity.dart';
 
 abstract class IPokemonsNetworkDatasource {
-  Future<List<ResultsModel>> listAll();
-  Future<PokemonResultModel> listById(String id);
+  Future<List<ResultsModel>> listAll(String? limit);
+  Future<PokemonResultModel> listPokemonById(String id);
   Future<ColorModel> getColor(String id);
   Future<List<ResultsModel>> listByName(String name);
 }
 
 class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
   @override
-  Future<List<ResultsModel>> listAll() async {
+  Future<List<ResultsModel>> listAll(String? limit) async {
     try {
+      String endpoint = '';
+      if (limit != '') {
+         endpoint = '${PokeAPIEndpoints.getAllPokemon}?offset=${limit}&limit=20';
+      }else{
+         endpoint = '${PokeAPIEndpoints.getAllPokemon}';
+      }
       final response = await Dio(
-        BaseOptions(
-          baseUrl: PokeAPIEndpoints.urlBase,
-        ),
-      ).get(PokeAPIEndpoints.getAllPokemon);
+          BaseOptions(
+            baseUrl: PokeAPIEndpoints.urlBase,
+          ),
+        ).get(endpoint);
+
       final List result = response.data['results'];
       final resultModel = result
           .map<ResultsModel>((data) => ResultsModel.fromJson(data))
@@ -36,7 +43,7 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
   }
 
   @override
-  Future<PokemonResultModel> listById(String id) async {
+  Future<PokemonResultModel> listPokemonById(String id) async {
     try {
       final response = await Dio(
         BaseOptions(
@@ -105,7 +112,8 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
       final result = response.data;
       var dataPokemon = {
         'name': result['name'],
-        'url': "${PokeAPIEndpoints.urlBase}${PokeAPIEndpoints.getAllPokemon}${result['id']}/",
+        'url':
+            "${PokeAPIEndpoints.urlBase}${PokeAPIEndpoints.getAllPokemon}${result['id']}/",
       };
       resposta.add(dataPokemon);
 

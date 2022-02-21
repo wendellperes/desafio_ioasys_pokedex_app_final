@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pekedex_ioasys/features/pokemons/data/models/pokemon_model.dart';
 
 import '../../../../consts/globalString_empty.dart';
 
@@ -27,17 +28,17 @@ class PokemonResultEntity extends Equatable {
         types:[],
         stats:[],
       );
-  factory PokemonResultEntity.fromEntity(PokemonResultEntity entity) =>
+  factory PokemonResultEntity.fromEntity(PokemonResultModel model) =>
       PokemonResultEntity(
-        idPokemon: entity.idPokemon,
-        abilities: entity.abilities,
-        name:  entity.name,
-        color: entity.color,
-        description: entity.description,
-        height: entity.height,
-        weight: entity.weight,
-        types: entity.types,
-        stats: entity.stats,
+        idPokemon: model.idPokemon,
+        abilities: model.abilities,
+        name:  model.name,
+        color: model.color,
+        description: model.description,
+        height: model.height,
+        weight: model.weight,
+        types: model.types,
+        stats: model.stats,
       );
 
   final int? idPokemon;

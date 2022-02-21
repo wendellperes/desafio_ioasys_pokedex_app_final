@@ -12,21 +12,20 @@ import '../../domain/entities/result_Pokemon._entity.dart';
 import '../../domain/usecases/pokemon_get_by_name_usecase.dart';
 import '../../domain/usecases/pokemon_get_by_id_usecase.dart';
 
-class HomePageController extends ChangeNotifier {
-  HomePageController({
-    required this.pokemonListarAllUsecase,
-    required this.pokemonListarByNameUseCase,
+class DetailsPageController extends ChangeNotifier {
+  DetailsPageController({
+    required this.getPokemonByIdUseCase,
   });
 
-  final PokemonListar_all_UseCase pokemonListarAllUsecase;
-  final PokemonListarByNameUseCase pokemonListarByNameUseCase;
+  final GetPokemonByIdUseCase getPokemonByIdUseCase;
 
   AppState state = AppState.empty();
-  final List<PokemonEntity> dataResult = [];
+ PokemonResultEntity dataPokemon = PokemonResultEntity.empty();
+
   final isDark = ValueNotifier<bool>(false);
   final theme = ValueNotifier<Color>(Colors.white);
 
-  List<PokemonEntity> get pokemonsall =>
+ PokemonResultEntity get pokemonsall =>
       state.when(success: (value) => value, orElse: () => []);
 
   void update(AppState state) {
@@ -43,30 +42,18 @@ class HomePageController extends ChangeNotifier {
     }
   }
 
-  Future<void> getData(String? limit) async {
+  Future<void> getData(String id) async {
     try {
       update(AppState.loading());
-      final pokemonsResult = await pokemonListarAllUsecase(limit);
+      final pokemonsResult = await getPokemonByIdUseCase(id);
       pokemonsResult.fold((_) => {}, (r) {
-        dataResult.addAll(r);
+        dataPokemon = r;
       });
-      update(AppState.success<List<PokemonEntity>>(dataResult));
+      update(AppState.success<PokemonResultEntity>(dataPokemon));
     } catch (e) {
       update(AppState.error(e.toString()));
     }
   }
 
-  Future<void> getPokemonByName(String name) async {
-    try {
-      update(AppState.loading());
-      dataResult.clear();
-      final pokemonsResult = await pokemonListarByNameUseCase(name);
-      pokemonsResult.fold((l) => null, (r){
-        dataResult.addAll(r);
-      });
-      update(AppState.success<List<PokemonEntity>>(dataResult));
-    } catch (e) {
-      update(AppState.error(e.toString()));
-    }
-  }
+ 
 }

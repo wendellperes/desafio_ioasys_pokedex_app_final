@@ -29,6 +29,8 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/': (BuildContext context) => SplashPage(),
         '/HomePage': (BuildContext context) => const HomePage(),
+        '/details': (BuildContext context) => const DetailsPage(),
+        '/favorit': (BuildContext context) => const FavoritPage()
       },
     );
   }

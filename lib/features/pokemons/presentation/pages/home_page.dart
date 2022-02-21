@@ -1,22 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pekedex_ioasys/consts/colors_type.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
-import 'package:pekedex_ioasys/features/pokemons/domain/entities/result_Pokemon._entity.dart';
 import 'package:pekedex_ioasys/features/pokemons/presentation/controllers/home_page_controller.dart';
-import '../../../../consts/texts_styles.dart';
 import '../../../../core/dependency_injector.dart';
 import '../widgets/List_cards_pokemons_widgets.dart';
 import '../widgets/header_top_widgets.dart';
 import '../widgets/no_search_widgets.dart';
-import '../widgets/title_and_icon.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  // ignore: prefer_const_constructors
   Widget build(BuildContext context) => HomePageView(
         controller: serviceLocator.get<HomePageController>(),
       );
@@ -44,7 +39,7 @@ class _HomePageViewState extends State<HomePageView> {
   }
 
   Future<void> _init() async {
-    await _controller.getData();
+    await _controller.getData('');
   }
 
   @override
@@ -75,54 +70,77 @@ class _HomePageViewState extends State<HomePageView> {
                         child: TextFormField(
                           keyboardType: TextInputType.text,
                           controller: _pesquisa,
+                          onFieldSubmitted: (value) {
+                            String textFormarter = value.replaceAll(' ', '');
+                            if (value.isNotEmpty) {
+                              _controller.getPokemonByName(
+                                  textFormarter.toLowerCase());
+                            } else {
+                              _controller.getData('');
+                            }
+                          },
+                          style: TextStyle(color: AppColors.pinkBackground),
                           decoration: InputDecoration(
-                              labelText: 'Buscar',
-                              hintText: 'Buscar pokemon',
-                              hintStyle: TextStyle(
-                                  color: AppColors.darktext,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400),
-                              labelStyle: TextStyle(
-                                fontSize: 17,
-                                color: AppColors.pinkBackground,
-                                fontWeight: FontWeight.w400,
+                            labelText: 'Buscar',
+                            hintText: 'Buscar pokemon',
+                            hintStyle: TextStyle(
+                                color: AppColors.darktext,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400),
+                            labelStyle: TextStyle(
+                              fontSize: 17,
+                              color: AppColors.pinkBackground,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.pinkBackground),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(12))),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.pinkBackground),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(12))),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.pinkBackground),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(12))),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.pinkBackground),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(12))),
+                            suffixIcon: IconButton(
+                              color: AppColors.pinkBackground,
+                              icon: const Icon(
+                                Icons.search,
                               ),
-                              disabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: AppColors.pinkBackground),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12))),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: AppColors.pinkBackground),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12))),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: AppColors.pinkBackground),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12))),
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: AppColors.pinkBackground),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12))),
-                              suffixIcon: IconButton(
-                                color: AppColors.pinkBackground,
-                                icon: const Icon(
-                                  Icons.search,
-                                ),
-                                onPressed: () {
-                                  _controller.getPokemonByName(_pesquisa.text);
-                                },
-                              )),
+                              onPressed: () {
+                                String textFormarter =
+                                    _pesquisa.text.replaceAll(' ', '');
+                                if (_pesquisa.text.isNotEmpty) {
+                                  _controller.getPokemonByName(
+                                      textFormarter.toLowerCase());
+                                } else {
+                                  _controller.getData('');
+                                }
+                              },
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
                         width: 15,
                       ),
                       GestureDetector(
-                        onTap: () => {print('Ir ate favorit')},
+                        onTap: () => {
+                          Navigator.pushNamed(
+                            context,
+                            '/favorit',
+                          ),
+                        },
                         child: Icon(
                           Icons.favorite,
                           size: 33,
@@ -146,17 +164,28 @@ class _HomePageViewState extends State<HomePageView> {
                           return SizedBox(
                             height: 465,
                             width: 354,
-                            child: GridView.count(
-                              scrollDirection: Axis.vertical,
-                              crossAxisCount: 3,
-                              children: List.generate(pokemons.length, (index) {
-                                return CardsPokemonsList(
-                                  pokemons: pokemons[index],
-                                  onTap: (){
-                                    print(pokemons[index].idPokemon);
-                                  },
-                                );
-                              }),
+                            child: RawScrollbar(
+                              thumbColor: AppColors.pinkBackground,
+                              radius: Radius.circular(20),
+                              thickness: 1,
+                              timeToFade: const Duration(milliseconds: 200),
+                              isAlwaysShown: true,
+                              child: GridView.count(
+                                scrollDirection: Axis.vertical,
+                                crossAxisCount: 3,
+                                children:
+                                    List.generate(pokemons.length, (index) {
+                                  return CardsPokemonsList(
+                                    pokemons: pokemons[index],
+                                    color: _controller.theme,
+                                    onTap: () {
+                                      Navigator.pushNamed(context, '/details',
+                                          arguments:
+                                              '${pokemons[index].idPokemon}');
+                                    },
+                                  );
+                                }),
+                              ),
                             ),
                           );
                         },
@@ -177,7 +206,7 @@ class _HomePageViewState extends State<HomePageView> {
                             ),
                           );
                         },
-                        error: (message, _){
+                        error: (message, _) {
                           return NoSearch();
                         },
                         orElse: () => Container(),
@@ -188,6 +217,33 @@ class _HomePageViewState extends State<HomePageView> {
               ],
             ),
           ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            onPressed: () {},
+            child: GestureDetector(
+              onTap: () {
+                _controller.getData('${_controller.dataResult.length}');
+              },
+              child: Container(
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: AppColors.pinkBackground,
+                      size: 30,
+                    ),
+                    Text(
+                      'Ver Mais',
+                      style: GoogleFonts.poppins(
+                          fontSize: 10, color: AppColors.pinkBackground),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         );
       },
     );

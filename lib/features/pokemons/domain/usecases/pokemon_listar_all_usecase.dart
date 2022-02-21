@@ -6,13 +6,13 @@ import '../../../../core/usecases/usecases.dart';
 import '../repositories/pokemon_repository.dart';
 
 class PokemonListar_all_UseCase
-    implements IUseCase<List<PokemonEntity>, NoParams> {
+    implements IUseCase<List<PokemonEntity>, String?> {
   const PokemonListar_all_UseCase(this.repository);
 
   final IPokemonRepository repository;
 
   @override
-  Future<Either<Exception, List<PokemonEntity>>> call(NoParams params) async {
-    return repository.listAll();
+  Future<Either<Exception, List<PokemonEntity>>> call(limit) async {
+    return repository.listAll(limit);
   }
 }
