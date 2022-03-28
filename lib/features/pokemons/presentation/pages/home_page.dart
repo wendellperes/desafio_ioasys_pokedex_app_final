@@ -4,7 +4,7 @@ import 'package:pekedex_ioasys/consts/colors_type.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
 import 'package:pekedex_ioasys/features/pokemons/presentation/controllers/home_page_controller.dart';
 import '../../../../core/dependency_injector.dart';
-import '../widgets/List_cards_pokemons_widgets.dart';
+import '../widgets/list_cards_pokemons_widgets.dart';
 import '../widgets/header_top_widgets.dart';
 import '../widgets/no_search_widgets.dart';
 
@@ -59,7 +59,6 @@ class _HomePageViewState extends State<HomePageView> {
                 const SizedBox(
                   height: 35,
                 ),
-                //TODO: Input Search
                 Container(
                   width: 350,
                   padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -131,7 +130,7 @@ class _HomePageViewState extends State<HomePageView> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       GestureDetector(
@@ -174,7 +173,7 @@ class _HomePageViewState extends State<HomePageView> {
                                   onTap: () {
                                     Navigator.pushNamed(context, '/details',
                                         arguments:
-                                            '${pokemons[index].idPokemon}');
+                                            pokemons[index].idPokemon);
                                   },
                                 );
                               }),
@@ -183,7 +182,7 @@ class _HomePageViewState extends State<HomePageView> {
                         },
                         loading: () {
                           return Container(
-                            margin: EdgeInsets.symmetric(vertical: 250),
+                            margin: const EdgeInsets.symmetric(vertical: 250),
                             child: Center(
                               child: Column(
                                 children: [
@@ -192,14 +191,14 @@ class _HomePageViewState extends State<HomePageView> {
                                       AppColors.pinkBackground,
                                     ),
                                   ),
-                                  Text('Carregando...')
+                                  const Text('Carregando...')
                                 ],
                               ),
                             ),
                           );
                         },
                         error: (message, _) {
-                          return NoSearch();
+                          return const NoSearch();
                         },
                         orElse: () => Container(),
                       ),
@@ -217,21 +216,19 @@ class _HomePageViewState extends State<HomePageView> {
               onTap: () {
                 _controller.getData('${_controller.dataResult.length}');
               },
-              child: Container(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.arrow_drop_down_circle,
-                      color: AppColors.pinkBackground,
-                      size: 30,
-                    ),
-                    Text(
-                      'Ver Mais',
-                      style: GoogleFonts.poppins(
-                          fontSize: 10, color: AppColors.pinkBackground),
-                    )
-                  ],
-                ),
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: AppColors.pinkBackground,
+                    size: 30,
+                  ),
+                  Text(
+                    'Ver Mais',
+                    style: GoogleFonts.poppins(
+                        fontSize: 10, color: AppColors.pinkBackground),
+                  )
+                ],
               ),
             ),
           ),

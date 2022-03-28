@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../consts/globalString_empty.dart';
+import '../../../../consts/global_string_empty.dart';
 
 class PokemonEntity extends Equatable {
   const PokemonEntity({

@@ -1,14 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
-
 import '../../domain/entities/result_Pokemon._entity.dart';
 
 part 'pokemon_model.g.dart';
 
 @JsonSerializable()
 class PokemonResultModel extends Equatable {
-  PokemonResultModel({
+  const PokemonResultModel({
     required this.idPokemon,
     required this.abilities,
     required this.name,
@@ -46,7 +44,6 @@ class PokemonResultModel extends Equatable {
   final List<int>? stats;
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         idPokemon,
         abilities,

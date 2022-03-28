@@ -27,7 +27,6 @@ class _HeaderTopState extends State<HeaderTop> {
         const SizedBox(
           height: 73,
         ),
-        //TODO: Header homePage
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(

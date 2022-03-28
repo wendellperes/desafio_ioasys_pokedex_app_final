@@ -5,6 +5,7 @@ import 'package:pekedex_ioasys/consts/colors_type.dart';
 import 'package:pekedex_ioasys/consts/texts_styles.dart';
 
 class SplashPage extends StatefulWidget {
+   const SplashPage({Key? key}) : super(key: key);
   @override
   SplashPageState createState() => SplashPageState();
 }

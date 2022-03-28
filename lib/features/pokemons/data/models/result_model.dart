@@ -8,7 +8,7 @@ part 'result_model.g.dart';
 
 @JsonSerializable()
 class ResultsModel extends Equatable {
-  ResultsModel({
+  const ResultsModel({
     this.name,
     this.url,
   });

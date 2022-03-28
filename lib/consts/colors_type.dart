@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static final Color pinkBackground = Color(0xFFEC0344);
-  static final Color darkBackground = Color(0xFF2F2F2F);
-  static final Color darktext = Color(0xFF666666);
-  static final Color darktext2 = Color(0xFFBDBDBD);
-  static final Color whiteBackground = Color(0xFFFFFFFF);
-  static final Color lightGray = Color(0xFFE0E0E0);
-  static final Color darkGray = Color(0xFF212121);
+  static  Color pinkBackground =  const Color(0xFFEC0344);
+  static  Color darkBackground = const Color(0xFF2F2F2F);
+  static  Color darktext = const Color(0xFF666666);
+  static  Color darktext2 = const Color(0xFFBDBDBD);
+  static  Color whiteBackground = const Color(0xFFFFFFFF);
+  static  Color lightGray = const Color(0xFFE0E0E0);
+  static  Color darkGray = const Color(0xFF212121);
 }

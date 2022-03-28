@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:pekedex_ioasys/features/pokemons/data/models/pokemon_model.dart';
-import 'package:pekedex_ioasys/features/pokemons/data/models/result_model.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/result_Pokemon._entity.dart';
 import '../../domain/repositories/pokemon_repository.dart';

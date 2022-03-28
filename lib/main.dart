@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pekedex_ioasys/features/pokemons/data/datasource/pokemon_datasource.dart';
-
 import 'core/dependency_injector.dart';
 import 'features/pokemons/presentation/pages/details_page.dart';
 import 'features/pokemons/presentation/pages/favorit_page.dart';
@@ -27,7 +25,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) => SplashPage(),
+        '/': (BuildContext context) => const SplashPage(),
         '/HomePage': (BuildContext context) => const HomePage(),
         '/details': (BuildContext context) => const DetailsPage(),
         '/favorit': (BuildContext context) => const FavoritPage()

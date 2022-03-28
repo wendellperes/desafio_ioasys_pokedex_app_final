@@ -3,8 +3,6 @@ import 'package:pekedex_ioasys/features/pokemons/data/models/pokemon_model.dart'
 import 'package:pekedex_ioasys/features/pokemons/data/models/result_model.dart';
 
 import '../../../../consts/const_endpoints.dart';
-import '../../../../core/service/dio.dart';
-import '../../domain/entities/pokemon_entity.dart';
 
 abstract class IPokemonsNetworkDatasource {
   Future<List<ResultsModel>> listAll(String? limit);
@@ -18,9 +16,9 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
     try {
       String endpoint = '';
       if (limit != '') {
-         endpoint = '${PokeAPIEndpoints.getAllPokemon}?offset=${limit}&limit=20';
+         endpoint = '${PokeAPIEndpoints.getAllPokemon}?offset=$limit&limit=20';
       }else{
-         endpoint = '${PokeAPIEndpoints.getAllPokemon}';
+         endpoint = PokeAPIEndpoints.getAllPokemon;
       }
       final response = await Dio(
           BaseOptions(
@@ -33,7 +31,7 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
           .map<ResultsModel>((data) => ResultsModel.fromJson(data))
           .toList();
       return resultModel;
-    } catch (e, stack) {
+    } catch (e) {
       throw Exception;
     }
   }
@@ -45,7 +43,7 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
         BaseOptions(
           baseUrl: PokeAPIEndpoints.urlBase,
         ),
-      ).get("/pokemon/${id}");
+      ).get("/pokemon/$id");
       final result = response.data;
 
       final responseColorAndDescription = await Dio(
@@ -87,7 +85,7 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
       };
       final resultModel = PokemonResultModel.fromJson(dataPokemon);
       return resultModel;
-    } catch (e, stack) {
+    } catch (e) {
       throw Exception;
     }
   }
@@ -100,7 +98,7 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
         BaseOptions(
           baseUrl: PokeAPIEndpoints.urlBase,
         ),
-      ).get("${PokeAPIEndpoints.getAllPokemon}${name}");
+      ).get("${PokeAPIEndpoints.getAllPokemon}$name");
       final result = response.data;
       var dataPokemon = {
         'name': result['name'],
@@ -113,7 +111,7 @@ class PokemonsNetworkDatasource extends IPokemonsNetworkDatasource {
           .map<ResultsModel>((data) => ResultsModel.fromJson(data))
           .toList();
       return resultModel;
-    } catch (e, stack) {
+    } catch (e) {
       throw Exception;
     }
   }

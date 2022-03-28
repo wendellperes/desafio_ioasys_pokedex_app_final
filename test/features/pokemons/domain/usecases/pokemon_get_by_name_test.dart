@@ -1,4 +1,4 @@
-import 'package:pekedex_ioasys/core/usecases/no_params.dart';
+
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/repositories/pokemon_repository.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/usecases/pokemon_listar_all_usecase.dart';
@@ -11,7 +11,7 @@ class MockPokemonRepository extends Mock implements IPokemonRepository {}
 
 void main() {
   late MockPokemonRepository repository;
-  late PokemonListar_all_UseCase usuarioListUsecase;
+  late PokemonListarAllUseCase usuarioListUsecase;
   final List<PokemonEntity> pokemonEntityInitial = [
     const PokemonEntity(
       name: 'bulbasaur',
@@ -29,7 +29,7 @@ void main() {
 
   setUpAll(() {
     repository = MockPokemonRepository();
-    usuarioListUsecase = PokemonListar_all_UseCase(repository);
+    usuarioListUsecase = PokemonListarAllUseCase(repository);
     registerFallbackValue(List<PokemonEntity>);
   });
 

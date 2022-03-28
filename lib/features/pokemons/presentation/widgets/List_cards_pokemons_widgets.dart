@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
-import 'package:pekedex_ioasys/utils/getColor.dart';
-
-import '../../../../consts/colors_type.dart';
-import '../../../../utils/getImage.dart';
-import '../../domain/entities/result_Pokemon._entity.dart';
+import 'package:pekedex_ioasys/utils/get_image.dart';
 
 class CardsPokemonsList extends StatefulWidget {
   const CardsPokemonsList(
@@ -25,9 +19,6 @@ class CardsPokemonsList extends StatefulWidget {
 
 class _CardsPokemonsListState extends State<CardsPokemonsList> {
   bool isDark = false;
-  final ThemeData _dark = ThemeData(backgroundColor: AppColors.darkBackground);
-  final ThemeData _light =
-      ThemeData(backgroundColor: AppColors.whiteBackground);
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +57,7 @@ class _CardsPokemonsListState extends State<CardsPokemonsList> {
                     height: 50,
                     width: 50,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Expanded(

@@ -1,13 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
-import 'package:pekedex_ioasys/features/pokemons/domain/entities/result_Pokemon._entity.dart';
-import '../../../../core/usecases/no_params.dart';
 import '../../../../core/usecases/usecases.dart';
 import '../repositories/pokemon_repository.dart';
 
-class PokemonListar_all_UseCase
+class PokemonListarAllUseCase
     implements IUseCase<List<PokemonEntity>, String?> {
-  const PokemonListar_all_UseCase(this.repository);
+  const PokemonListarAllUseCase(this.repository);
 
   final IPokemonRepository repository;
 

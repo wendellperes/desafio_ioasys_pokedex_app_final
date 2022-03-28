@@ -1,15 +1,10 @@
-import 'package:dartz/dartz.dart';
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:pekedex_ioasys/consts/colors_type.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/entities/pokemon_entity.dart';
 import 'package:pekedex_ioasys/features/pokemons/domain/usecases/pokemon_listar_all_usecase.dart';
 import 'package:pekedex_ioasys/utils/app_state.dart';
 
-import '../../../../core/usecases/no_params.dart';
-import '../../domain/entities/result_Pokemon._entity.dart';
 import '../../domain/usecases/pokemon_get_by_name_usecase.dart';
-import '../../domain/usecases/pokemon_get_by_id_usecase.dart';
 
 class HomePageController extends ChangeNotifier {
   HomePageController({
@@ -17,7 +12,7 @@ class HomePageController extends ChangeNotifier {
     required this.pokemonListarByNameUseCase,
   });
 
-  final PokemonListar_all_UseCase pokemonListarAllUsecase;
+  final PokemonListarAllUseCase pokemonListarAllUsecase;
   final PokemonListarByNameUseCase pokemonListarByNameUseCase;
 
   AppState state = AppState.empty();

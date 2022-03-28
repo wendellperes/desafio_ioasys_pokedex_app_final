@@ -153,10 +153,10 @@ class ColorUtils {
   };
 
   static Color getColorByName(String nameCor) {
-    Color? ColorFinal = namedColors[nameCor];
+    Color? colorFinal = namedColors[nameCor];
     if (!namedColors.containsKey(nameCor)) {
-      return Color.fromRGBO(221, 160, 221, 1.0);
+      return const Color.fromRGBO(221, 160, 221, 1.0);
     }
-    return ColorFinal!;
+    return colorFinal!;
   }
 }

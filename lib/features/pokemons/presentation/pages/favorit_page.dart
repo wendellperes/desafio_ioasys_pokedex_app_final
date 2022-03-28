@@ -1,14 +1,10 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pekedex_ioasys/consts/colors_type.dart';
-
 import '../../../../consts/texts_styles.dart';
-import '../widgets/List_cards_pokemons_widgets.dart';
 import '../widgets/header_top_widgets.dart';
 import '../widgets/no_search_widgets.dart';
-import '../widgets/title_and_icon.dart';
 
 class FavoritPage extends StatefulWidget {
   const FavoritPage({Key? key}) : super(key: key);
@@ -37,17 +33,15 @@ class _FavoritPageState extends State<FavoritPage> {
             const SizedBox(
               height: 45,
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.favorite,
-                    color: AppColors.pinkBackground,
-                  ),
-                  Text('Meus favoritos', style: AppTextStyles.titleFavorit),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.favorite,
+                  color: AppColors.pinkBackground,
+                ),
+                Text('Meus favoritos', style: AppTextStyles.titleFavorit),
+              ],
             ),
             const SizedBox(
               height: 63,
@@ -70,21 +64,19 @@ class _FavoritPageState extends State<FavoritPage> {
         onPressed: () {},
         child: GestureDetector(
           onTap: () => Navigator.pop(context),
-          child: Container(
-            child: Column(
-              children: [
-                Icon(
-                  Icons.arrow_back,
-                  color: AppColors.pinkBackground,
-                  size: 30,
-                ),
-                Text(
-                  'Voltar',
-                  style: GoogleFonts.poppins(
-                      fontSize: 12, color: AppColors.pinkBackground),
-                )
-              ],
-            ),
+          child: Column(
+            children: [
+              Icon(
+                Icons.arrow_back,
+                color: AppColors.pinkBackground,
+                size: 30,
+              ),
+              Text(
+                'Voltar',
+                style: GoogleFonts.poppins(
+                    fontSize: 12, color: AppColors.pinkBackground),
+              )
+            ],
           ),
         ),
       ),

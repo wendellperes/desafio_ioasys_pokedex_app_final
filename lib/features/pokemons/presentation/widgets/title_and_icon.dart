@@ -8,19 +8,17 @@ class TitleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          SvgPicture.asset('images/logo_icon.svg'),
-          SizedBox(
-            width: 13,
-          ),
-          Text(
-            'ioasys pokédex',
-            style: AppTextStyles.titlePink,
-          )
-        ],
-      ),
+    return Row(
+      children: [
+        SvgPicture.asset('images/logo_icon.svg'),
+        const SizedBox(
+          width: 13,
+        ),
+        Text(
+          'ioasys pokédex',
+          style: AppTextStyles.titlePink,
+        )
+      ],
     );
   }
 }

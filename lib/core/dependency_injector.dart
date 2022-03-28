@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:get_it/get_it.dart';
 import 'package:pekedex_ioasys/features/pokemons/data/datasource/pokemon_datasource.dart';
@@ -19,7 +19,7 @@ void setupAppDependencies() {
     ..registerLazySingleton<HomePageController>(
       () => HomePageController(
         pokemonListarAllUsecase:
-            serviceLocator.get<PokemonListar_all_UseCase>(),
+            serviceLocator.get<PokemonListarAllUseCase>(),
         pokemonListarByNameUseCase:
             serviceLocator.get<PokemonListarByNameUseCase>(),
       ),
@@ -38,8 +38,8 @@ void setupAppDependencies() {
     ..registerLazySingleton<IPokemonsNetworkDatasource>(
       () => PokemonsNetworkDatasource(),
     )
-    ..registerLazySingleton<PokemonListar_all_UseCase>(
-      () => PokemonListar_all_UseCase(
+    ..registerLazySingleton<PokemonListarAllUseCase>(
+      () => PokemonListarAllUseCase(
         serviceLocator.get<IPokemonRepository>(),
       ),
     )
